@@ -1,0 +1,31 @@
+.new-product {
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.new-product__head-title {
+  text-align: center;
+}
+.head-title__main {
+  font-size: 3rem;
+  font-weight: 400;
+}
+.head-title__notic {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.head-title__des {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+.new-product__wrapper {
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5rem;
+}
+.new-product__button-wrapper {
+  text-align: center;
+  margin-top: 4rem;
+}
