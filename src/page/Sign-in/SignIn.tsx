@@ -158,7 +158,6 @@ const SignIn: React.FC = () => {
                 onChange={handleChange}
                 type="text"
                 required
-                pattern="[0-9+]{8,13}"
                 name="phone"
                 placeholder="+12124567890"
               />
