@@ -1,15 +1,16 @@
-import { FC, memo, useEffect, useState } from 'react';
-import { collection, getDocs, limit, query, where } from 'firebase/firestore';
-import { db } from '../../config/firebase.config';
-import { IProducts } from '../../types/productsType';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { ProductCard } from '../../components';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import './RelatedProduct.css';
+import { FC, memo, useEffect, useState } from "react";
+// @ts-ignore
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase.config";
+import { IProducts } from "../../types/productsType";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { ProductCard } from "../../components";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./RelatedProduct.css";
 
-import { Pagination } from 'swiper';
+import { Pagination } from "swiper";
 interface IProps {
   catagory: string;
   currentProductId: string;
@@ -19,18 +20,24 @@ const RelatedProduct: FC<IProps> = ({ catagory, currentProductId }) => {
   useEffect(() => {
     (async () => {
       const data: any[] = [];
-      const productRef = collection(db, 'products');
-      const quryRef = query(productRef, where('catagory', '==', catagory), limit(12));
+      const productRef = collection(db, "products");
+      const quryRef = query(
+        productRef,
+        where("catagory", "==", catagory),
+        limit(12)
+      );
       const snapShot = await getDocs(quryRef);
-      snapShot.forEach((chunk) => {
+      snapShot.forEach((chunk: { data: () => any }) => {
         data.push(chunk.data());
       });
-      const productData: IProducts[] = data.filter((product) => product.id !== currentProductId);
+      const productData: IProducts[] = data.filter(
+        (product) => product.id !== currentProductId
+      );
       setRelatedProduct(productData);
     })();
   }, [catagory, currentProductId]);
   return (
-    <div className='related-product'>
+    <div className="related-product">
       <Swiper
         pagination={{ clickable: true }}
         slidesPerView={1}

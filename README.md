@@ -2,7 +2,7 @@
 
 ![GitHub Stars](https://img.shields.io/github/stars/fzn0x/Electrical)
 
-A fully functional e-commerce shop demo built using [React](https://github.com/facebook/react) and [Firebase](https://firebase.google.com/).
+A fully functional e-commerce shop demo built using [React](https://github.com/facebook/react) and [Supabase](https://supabase.com/).
 
 ### Technologies Used
 

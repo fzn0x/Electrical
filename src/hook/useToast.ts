@@ -1,21 +1,27 @@
-import { useToastContext } from '../context/Toast/ToastContext';
+import { useToastContext } from "../context/Toast/ToastContext";
 
 type IfuctionProps = (title: string, discription: string) => void;
 
 const useToast = () => {
-  const { state, dispath } = useToastContext();
+  const { state, dispatch } = useToastContext();
 
   const errorToast: IfuctionProps = (title, discription) => {
     if (!state.isShow) {
-      dispath({ type: 'ADD_TOAST', payload: { title, discription, type: 'error' } });
+      dispatch({
+        type: "ADD_TOAST",
+        payload: { title, discription, type: "error" },
+      });
       setTimeout(() => {
         clearToast();
       }, 3000);
     }
   };
-  const succsesToast: IfuctionProps = (title, discription) => {
+  const successToast: IfuctionProps = (title, discription) => {
     if (!state.isShow) {
-      dispath({ type: 'ADD_TOAST', payload: { title, discription, type: 'succses' } });
+      dispatch({
+        type: "ADD_TOAST",
+        payload: { title, discription, type: "succses" },
+      });
 
       setTimeout(() => {
         clearToast();
@@ -23,10 +29,10 @@ const useToast = () => {
     }
   };
   const clearToast = (): void => {
-    dispath({ type: 'CLEAR_TOAST' });
+    dispatch({ type: "CLEAR_TOAST" });
   };
 
-  return { errorToast, succsesToast };
+  return { errorToast, successToast };
 };
 
 export default useToast;

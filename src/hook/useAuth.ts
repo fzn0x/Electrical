@@ -1,6 +1,6 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import { useUserContext } from '../context/User/UserContext';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../context/User/UserContext";
 
 const useAuth = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -12,7 +12,7 @@ const useAuth = () => {
       setLoading(false);
     } else {
       const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, (user: any) => {
         if (user) {
           setIsAuth(true);
           setLoading(false);

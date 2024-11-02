@@ -1,11 +1,13 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { FC, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { ProductCard, ProductCardLoading } from '../../components';
-import ProductContainer from '../../components/ProductsContainer/ProductContainer';
-import { db } from '../../config/firebase.config';
-import { Container } from '../../Layout';
-import { IProducts } from '../../types/productsType';
+// @ts-ignore
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { FC, useEffect, useState } from "react";
+// @ts-ignore
+import { useParams } from "react-router-dom";
+import { ProductCard, ProductCardLoading } from "../../components";
+import ProductContainer from "../../components/ProductsContainer/ProductContainer";
+import { db } from "../../config/firebase.config";
+import { Container } from "../../Layout";
+import { IProducts } from "../../types/productsType";
 
 const CatagoryPage: FC = () => {
   const { name } = useParams();
@@ -16,9 +18,12 @@ const CatagoryPage: FC = () => {
       try {
         setLoading(true);
         const productData: any[] = [];
-        const queryRef = query(collection(db, 'products'), where('catagory', '==', name));
+        const queryRef = query(
+          collection(db, "products"),
+          where("catagory", "==", name)
+        );
         const querySnap = await getDocs(queryRef);
-        querySnap.forEach((chunk) => {
+        querySnap.forEach((chunk: { data: () => any }) => {
           productData.push(chunk.data());
         });
         setLoading(false);
@@ -31,7 +36,8 @@ const CatagoryPage: FC = () => {
   return (
     <Container>
       <ProductContainer>
-        {loading && new Array(6).fill(0).map((_, i) => <ProductCardLoading key={i} />)}
+        {loading &&
+          new Array(6).fill(0).map((_, i) => <ProductCardLoading key={i} />)}
         {products.map((product, i: number) => (
           <ProductCard key={i} productData={product} />
         ))}
