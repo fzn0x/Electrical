@@ -24,7 +24,7 @@ const LoginButton: FC<IProps> = ({ className = "" }) => {
     </Link>
   ) : (
     <Link to="/sign-in" className={`header__register-button ${className}`}>
-      <span>logn</span>
+      <span>Login</span>
       <BiLogInCircle size={24} />
     </Link>
   );

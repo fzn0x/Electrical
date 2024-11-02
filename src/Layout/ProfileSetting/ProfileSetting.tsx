@@ -1,4 +1,4 @@
-import { getAuth, signOut, deleteUser } from "firebase/auth";
+import { supabase } from "../../config/supabase.config";
 // @ts-ignore
 import { deleteDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -12,13 +12,15 @@ import "./ProfileSetting.css";
 const ProfileSetting: React.FC = () => {
   const { dispatch } = useUserContext();
   const { setLoader } = useLoader();
-  const auth = getAuth();
+
   const { errorToast, successToast } = useToast();
   const navigate = useNavigate();
   const handleLogOut = async () => {
     try {
       setLoader(true);
-      await signOut(auth);
+      const { error } = await supabase.auth.signOut();
+
+      if (error) throw error;
       dispatch({ type: "LOG_OUT" });
       navigate("/");
       setLoader(false);
@@ -29,11 +31,13 @@ const ProfileSetting: React.FC = () => {
   };
   const handleDeleteAccount = async () => {
     try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setLoader(true);
       await Promise.all([
-        await deleteDoc(doc(db, "users", auth.currentUser!.uid)),
-        await deleteUser(auth.currentUser!),
-        await signOut(auth),
+        await supabase.from("users").delete().eq("id", user?.id),
+        await supabase.auth.signOut(),
       ]);
       successToast("account succsesfuly deleted", "");
       setLoader(false);

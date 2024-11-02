@@ -56,7 +56,9 @@ const Profile: React.FC = () => {
         ) : (
           <div>
             <h2 className="profile__content__welcome-message ">
-              welcome {user?.displayName || user?.phoneNumber}{" "}
+              welcome{" "}
+              {user?.identities?.[0]?.identity_data?.full_name ||
+                user?.phoneNumber}{" "}
             </h2>
             <p className="profile__content__welcome-sub-message">
               navigate between profile pages by link in left sidebar{" "}
